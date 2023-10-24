@@ -35,7 +35,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: example-patches
+          branch: new-resource-${{ inputs.name }}
           delete-branch: true
           title: Create new resource - ${{ inputs.name }}
           body: |
