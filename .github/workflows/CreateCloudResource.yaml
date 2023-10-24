@@ -25,8 +25,8 @@ jobs:
           cp templates/cloudResource.tf resources/${{ inputs.name }}.tf
       - name: Update new file data
         run: |
-          sed -i 's/{{ bucket_name }}/${{ inputs.name }}/' resources/${{ inputs.name }}.tf \
-          sed -i 's/{{ bucket_acl }}/${{ inputs.visibility }}/' resources/${{ inputs.name }}.tf \
+          sed -i 's/{{ bucket_name }}/${{ inputs.name }}/' resources/${{ inputs.name }}.tf
+          sed -i 's/{{ bucket_acl }}/${{ inputs.visibility }}/' resources/${{ inputs.name }}.tf
           cat resources/${{ inputs.name }}.tf
 
   # createResource:
