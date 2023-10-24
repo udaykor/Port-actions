@@ -1,1 +1,38 @@
-
+name: Create cloud resource
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+      visibility:
+        type: string
+      port_payload:
+        required: true
+        description: Port's payload, including details for who triggered the action and general context
+        type: stringx
+jobs:
+  createResource:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Update AUTHORS
+        run: |
+          echo "${{ inputs.name }} and ${{ inputs.visibility }}"
+  # createResource:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Update AUTHORS
+  #       run: |
+  #         git log --format='%aN <%aE>%n%cN <%cE>' | sort -u > AUTHORS
+  #     - name: Create Pull Request
+  #       uses: peter-evans/create-pull-request@v5
+  #       with:
+  #         commit-message: update authors
+  #         title: Update AUTHORS
+  #         body: Credit new contributors by updating AUTHORS
+  #         branch: update-authors
