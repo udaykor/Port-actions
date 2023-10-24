@@ -9,7 +9,7 @@ on:
       port_payload:
         required: true
         description: Port's payload, including details for who triggered the action and general context
-        type: stringx
+        type: string
 jobs:
   createResource:
     runs-on: ubuntu-latest
@@ -20,6 +20,7 @@ jobs:
       - name: Update AUTHORS
         run: |
           echo "${{ inputs.name }} and ${{ inputs.visibility }}"
+
   # createResource:
   #   runs-on: ubuntu-latest
   #   steps:
