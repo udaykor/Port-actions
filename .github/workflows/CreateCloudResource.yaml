@@ -25,20 +25,19 @@ jobs:
           sed -i 's/{{ bucket_name }}/${{ inputs.name }}/' resources/${{ inputs.name }}.tf
           sed -i 's/{{ bucket_acl }}/${{ inputs.visibility }}/' resources/${{ inputs.name }}.tf
           cat resources/${{ inputs.name }}.tf
-
-  # createResource:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #     - name: Update AUTHORS
-  #       run: |
-  #         git log --format='%aN <%aE>%n%cN <%cE>' | sort -u > AUTHORS
-  #     - name: Create Pull Request
-  #       uses: peter-evans/create-pull-request@v5
-  #       with:
-  #         commit-message: update authors
-  #         title: Update AUTHORS
-  #         body: Credit new contributors by updating AUTHORS
-  #         branch: update-authors
+  createPullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PAT }}
+          commit-message: Create new resource - ${{ inputs.name }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: example-patches
+          delete-branch: true
+          title: Create new resource - ${{ inputs.name }}
+          body: |
+            Create new ${{ inputs.visibility }} resource - ${{ inputs.name }}
+          draft: false
