@@ -23,10 +23,8 @@ jobs:
           sed -i 's/{{ bucket_name }}/${{ inputs.name }}/' resources/${{ inputs.name }}.tf
           sed -i 's/{{ bucket_acl }}/${{ inputs.visibility }}/' resources/${{ inputs.name }}.tf
           cat resources/${{ inputs.name }}.tf
-  createPullRequest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: peter-evans/create-pull-request@v5
+      - name: Open a pull request
+        uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.PAT }}
           commit-message: Create new resource - ${{ inputs.name }}
