@@ -50,7 +50,7 @@ jobs:
           blueprint: service
           properties: |-
             {
-              "iac_file": "```" + file://resources/${{ inputs.name }}.tf + "```"
+              "iac_file": file://resources/${{ inputs.name }}.tf
             }
           clientId: ${{ secrets.PORT_CLIENT_ID }}
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
