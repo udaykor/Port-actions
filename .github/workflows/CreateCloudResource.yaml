@@ -37,3 +37,22 @@ jobs:
           body: |
             Create new ${{ inputs.visibility }} resource - ${{ inputs.name }}
           draft: false
+  create-entity-in-port-and-update-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: UPSERT Entity
+        uses: port-labs/port-github-action@v1
+        with:
+          identifier: some_identifier
+          title: Some Title
+          team: "[]"
+          icon: DefaultBlueprint
+          blueprint: service
+          properties: |-
+            {
+              "iac_file": "```" + file://resources/${{ inputs.name }}.tf + "```"
+            }
+          clientId: ${{ secrets.PORT_CLIENT_ID }}
+          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+          operation: UPSERT
+          runId: ${{fromJson(inputs.port_payload).context.runId}}
