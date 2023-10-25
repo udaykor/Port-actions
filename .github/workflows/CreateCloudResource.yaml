@@ -43,7 +43,7 @@ jobs:
       - name: UPSERT Entity
         uses: port-labs/port-github-action@v1
         with:
-          identifier: ${{fromJson(inputs.port_payload).entity.identifier}}
+          identifier: ${{fromJson(inputs.port_payload).context.entity}}
           blueprint: service
           properties: |-
             {
