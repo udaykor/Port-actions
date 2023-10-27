@@ -15,8 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           repository: "${{ github.repository_owner }}/${{fromJson(inputs.port_payload).context.entity}}"
+          path: ./targetRepo
+          token: ${{ secrets.PAT }}
       - name: Copy template file
         run: |
           mkdir -p resources
