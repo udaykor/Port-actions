@@ -15,36 +15,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: "${{ github.repository_owner }}/${{fromJson(inputs.port_payload).context.entity}}"
       - name: Copy template file
         run: |
+          mkdir -p resources
           cp templates/cloudResource.tf resources/${{ inputs.name }}.tf
       - name: Update new file data
         run: |
           sed -i 's/{{ bucket_name }}/${{ inputs.name }}/' resources/${{ inputs.name }}.tf
           sed -i 's/{{ bucket_acl }}/${{ inputs.visibility }}/' resources/${{ inputs.name }}.tf
           cat resources/${{ inputs.name }}.tf
-      - name: Create pull request
-        uses: paygoc6/action-pull-request-another-repo@v1.0.1
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PAT }}
-        with:
-          source_folder: '/resources/'
-          destination_repo: '${{fromJson(inputs.port_payload).context.entity}}'
-          destination_folder: '/resources/'
-      # - name: Open a pull request
-      #   uses: peter-evans/create-pull-request@v5
+      # - name: Create pull request
+      #   uses: paygoc6/action-pull-request-another-repo@v1.0.1
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.PAT }}
       #   with:
-      #     token: ${{ secrets.PAT }}
-      #     commit-message: Create new resource - ${{ inputs.name }}
-      #     committer: GitHub <noreply@github.com>
-      #     author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-      #     signoff: false
-      #     branch: new-resource-${{ inputs.name }}
-      #     delete-branch: true
-      #     title: Create new resource - ${{ inputs.name }}
-      #     body: |
-      #       Create new ${{ inputs.visibility }} resource - ${{ inputs.name }}
-      #     draft: false
+      #     source_folder: '/resources/'
+      #     destination_repo: '${{fromJson(inputs.port_payload).context.entity}}'
+      #     destination_folder: '/resources/'
+      - name: Open a pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PAT }}
+          commit-message: Create new resource - ${{ inputs.name }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: new-resource-${{ inputs.name }}
+          delete-branch: true
+          title: Create new resource - ${{ inputs.name }}
+          body: |
+            Create new ${{ inputs.visibility }} resource - ${{ inputs.name }}
+          draft: false
   create-entity-in-port-and-update-run:
     runs-on: ubuntu-latest
     steps:
