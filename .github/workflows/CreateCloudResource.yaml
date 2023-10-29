@@ -31,7 +31,7 @@ jobs:
       - name: Open a pull request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.ORG_ADMIN_TOKEN }}
           path: ./targetRepo
           commit-message: Create new resource - ${{ inputs.name }}
           committer: GitHub <noreply@github.com>
