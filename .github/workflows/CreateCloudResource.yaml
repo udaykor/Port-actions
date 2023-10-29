@@ -19,7 +19,7 @@ jobs:
         with:
           repository: "${{ github.repository_owner }}/${{fromJson(inputs.port_payload).context.entity}}"
           path: ./targetRepo
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.ORG_ADMIN_TOKEN }}
       - name: Copy template file
         run: |
           mkdir -p ./targetRepo/resources
@@ -54,7 +54,7 @@ jobs:
           blueprint: service
           properties: |-
             {
-              "iac_file": "${{ github.server_url }}/${{fromJson(inputs.port_payload).context.entity}}/blob/main/resources/"
+              "resource_definitions": "${{ github.server_url }}/${{fromJson(inputs.port_payload).context.entity}}/blob/main/resources/"
             }
           clientId: ${{ secrets.PORT_CLIENT_ID }}
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
