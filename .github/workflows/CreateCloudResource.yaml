@@ -54,7 +54,7 @@ jobs:
           blueprint: service
           properties: |-
             {
-              "resource_definitions": "${{ github.server_url }}/${{fromJson(inputs.port_payload).context.entity}}/blob/main/resources/"
+              "resource_definitions": "${{ github.server_url }}/${{ github.repository_owner }}/${{fromJson(inputs.port_payload).context.entity}}/blob/main/resources/"
             }
           clientId: ${{ secrets.PORT_CLIENT_ID }}
           clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
