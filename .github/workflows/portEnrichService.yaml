@@ -32,38 +32,21 @@ jobs:
         with:
           token: ${{ secrets.ORG_ADMIN_TOKEN }}
           path: ./targetRepo
-          commit-message: Enrich service - ${{ inputs.name }}
+          commit-message: Enrich service - ${{fromJson(inputs.port_payload).context.entity}}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: new-resource-${{ inputs.name }}
+          branch: add-port-yml
           delete-branch: true
           title: Create new resource - ${{fromJson(inputs.port_payload).context.entity}}
           body: |
             Add port.yaml to enrich service in Port.
           draft: false
-  # create-entity-in-port-and-update-run:
-  #   runs-on: ubuntu-latest
-  #   needs: createResource
-  #   steps:
-  #     - name: UPSERT Entity
-  #       uses: port-labs/port-github-action@v1
-  #       with:
-  #         identifier: ${{fromJson(inputs.port_payload).context.entity}}
-  #         blueprint: service
-  #         properties: |-
-  #           {
-  #             "resource_definitions": "${{ github.server_url }}/${{ github.repository_owner }}/${{fromJson(inputs.port_payload).context.entity}}/blob/main/resources/"
-  #           }
-  #         clientId: ${{ secrets.PORT_CLIENT_ID }}
-  #         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-  #         operation: UPSERT
-  #         runId: ${{fromJson(inputs.port_payload).context.runId}}
-  #     - name: Create a log message
-  #       uses: port-labs/port-github-action@v1
-  #       with:
-  #         clientId: ${{ secrets.PORT_CLIENT_ID }}
-  #         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-  #         operation: PATCH_RUN
-  #         runId: ${{fromJson(inputs.port_payload).context.runId}}
-  #         logMessage: Pull request created successfully for "${{ inputs.name }}" 🚀
+      - name: Create a log message
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.PORT_CLIENT_ID }}
+          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+          operation: PATCH_RUN
+          runId: ${{fromJson(inputs.port_payload).context.runId}}
+          logMessage: Pull request to add port.yml created successfully for service "${{fromJson(inputs.port_payload).context.entity}}" 🚀
