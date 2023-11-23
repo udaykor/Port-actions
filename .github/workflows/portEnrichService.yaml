@@ -24,13 +24,13 @@ jobs:
         run: |
           touch ./targetRepo/port.yml
           echo \
-          - identifier: ${{fromJson(inputs.port_payload).context.entity}} \
+          "- identifier: ${{fromJson(inputs.port_payload).context.entity}} \
             blueprint: service \
             properties: \
               type: backend \
               lifecycle: Production \
             relations: \
-              domain: ${{ inputs.domain }} \
+              domain: ${{ inputs.domain }}" \
           > ./targetRepo/port.yml
       - name: Open a pull request
         uses: peter-evans/create-pull-request@v5
