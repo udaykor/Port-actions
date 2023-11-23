@@ -20,18 +20,13 @@ jobs:
           repository: "${{ github.repository_owner }}/${{fromJson(inputs.port_payload).context.entity}}"
           path: ./targetRepo
           token: ${{ secrets.ORG_ADMIN_TOKEN }}
-      - name: Create port.yml
+      - name: Copy template yml file
         run: |
-          touch ./targetRepo/port.yml
-          echo \
-          "- identifier: ${{fromJson(inputs.port_payload).context.entity}} \
-            blueprint: service \
-            properties: \
-              type: backend \
-              lifecycle: Production \
-            relations: \
-              domain: ${{ inputs.domain }}" \
-          > ./targetRepo/port.yml
+          cp templates/enrichService.yml ./targetRepo/port.yml
+      - name: Update new file data
+        run: |
+          sed -i 's/{{ service_identifier }}/${{fromJson(inputs.port_payload).context.entity}}/' ./targetRepo/port.yml
+          sed -i 's/{{ domain_identifier }}/${{ inputs.domain }}/' ./targetRepo/port.yml
       - name: Open a pull request
         uses: peter-evans/create-pull-request@v5
         with:
