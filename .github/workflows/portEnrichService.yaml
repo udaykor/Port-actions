@@ -38,7 +38,7 @@ jobs:
           signoff: false
           branch: add-port-yml
           delete-branch: true
-          title: Create new resource - ${{fromJson(inputs.port_payload).context.entity}}
+          title: Create port.yml - ${{fromJson(inputs.port_payload).context.entity}}
           body: |
             Add port.yaml to enrich service in Port.
           draft: false
