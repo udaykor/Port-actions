@@ -6,6 +6,14 @@ on:
         required: true
         description: The domain to which the service will be assigned
         type: string
+      type:
+        required: true
+        description: The service's type
+        type: string
+      lifecycle:
+        required: true
+        description: The service's lifecycle
+        type: string
       port_payload:
         required: true
         description: Port's payload, including details for who triggered the action and general context
@@ -27,6 +35,8 @@ jobs:
         run: |
           sed -i 's/{{ service_identifier }}/${{fromJson(inputs.port_payload).context.entity}}/' ./targetRepo/port.yml
           sed -i 's/{{ domain_identifier }}/${{ inputs.domain }}/' ./targetRepo/port.yml
+          sed -i 's/{{ service_type }}/${{ inputs.type }}/' ./targetRepo/port.yml
+          sed -i 's/{{ service_lifecycle }}/${{ inputs.lifecycle }}/' ./targetRepo/port.yml
       - name: Open a pull request
         uses: peter-evans/create-pull-request@v5
         with:
