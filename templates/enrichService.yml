@@ -3,7 +3,7 @@
 - identifier: "{{ service_identifier }}"
   blueprint: service
   properties:
-    type: backend
-    lifecycle: Production
+    type: "{{ service_type }}"
+    lifecycle: "{{ service_lifecycle }}"
   relations:
     domain: "{{ domain_identifier }}"
