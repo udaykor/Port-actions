@@ -8,10 +8,17 @@ on:
         required: true
         description: "Port's payload, including details for who triggered the action and general context (blueprint, run id, etc...)"
         type: string
+    secrets:
+      ORG_ADMIN_TOKEN:
+        required: true
+      PORT_CLIENT_ID:
+        required: true
+      PORT_CLIENT_SECRET:
+        required: true
 jobs:
   scaffold-service:
     env:
-      ORG_NAME: <YOUR-ORG-NAME>
+      ORG_NAME: Port-Samples
     runs-on: ubuntu-latest
     steps:
       - uses: port-labs/cookiecutter-gha@v1.1
