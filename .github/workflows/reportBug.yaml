@@ -51,7 +51,7 @@ jobs:
         clientId: ${{ secrets.PORT_CLIENT_ID }}
         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
         operation: PATCH_RUN
-        link: https://getport.atlassian.net/browse/${{ steps.create.outputs.issue }}
+        link: https://hadorco.atlassian.net/browse/${{ steps.create.outputs.issue }}
         runId: ${{ fromJson(inputs.port_context).runId }}
         logMessage: |
            Jira issue created! ✅
