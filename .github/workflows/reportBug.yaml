@@ -33,14 +33,6 @@ jobs:
         logMessage: |
             Creating a new Jira issue.. ⛴️
 
-    - name: Get current sprint from Jira
-      id: get-current-sprint-id
-      run: |
-        res=$(curl -u ${{ secrets.JIRA_USER_EMAIL }}:${{ secrets.JIRA_API_TOKEN }} -X GET -H "Content-Type: application/json" https://getport.atlassian.net/rest/agile/1.0/board/1/sprint)
-        SPRINT_ID=$(echo "${res}" | jq '.values | first(.[] | select(.state=="active")) | .id')
-        echo "SPRINT_ID=$SPRINT_ID" >> $GITHUB_OUTPUT
-        echo "The current sprint ID is ${SPRINT_ID}"
-
     - name: Create Jira issue
       id: create
       uses: atlassian/gajira-create@v3
