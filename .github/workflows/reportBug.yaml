@@ -37,8 +37,7 @@ jobs:
       id: create
       uses: atlassian/gajira-create@v3
       with:
-        project: PortSample
-
+        project: POR
         issuetype: Bug
         summary:  Bug | ${{ inputs.short_title }}
         description: |
