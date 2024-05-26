@@ -1,0 +1,9 @@
+{
+  "port_context": {
+    "user_first_name": "{{ .trigger.by.user.firstName }}",
+    "user_last_name": "{{ .trigger.by.user.lastName }}",
+    "runId": "{{.run.id}}"
+  },
+  "short_title": "{{ .inputs.short_title }}",
+  "description": "{{ .inputs.description }}"
+}
