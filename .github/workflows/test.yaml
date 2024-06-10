@@ -1,4 +1,5 @@
-on: push  
+on:
+  workflow_dispatch:
 jobs:
   first_demo_job:
     name: The first demo job
