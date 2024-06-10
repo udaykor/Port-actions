@@ -1,0 +1,9 @@
+on: push  
+jobs:
+  first_demo_job:
+    name: The first demo job
+    runs-on: ubuntu 
+    steps:
+      - name: Show the demo running
+        run: |
+          echo blah
