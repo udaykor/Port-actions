@@ -38,7 +38,7 @@ jobs:
         clientId: ${{ secrets.PORT_CLIENT_ID }}
         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
         operation: PATCH_RUN
-        link: ${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create.outputs.issue }}
+        link: ${{ steps.create.outputs.html_url }}
         runId: ${{ inputs.runId }}
         logMessage: |
            Jira issue created! ✅
