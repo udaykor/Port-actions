@@ -23,6 +23,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: create an issue
+      id: create
       uses: dacbd/create-issue-action@main
       with:
         token: ${{ github.token }}
@@ -43,4 +44,4 @@ jobs:
         logMessage: |
            Jira issue created! ✅
            
-           The issue id is: ${{ steps.create.outputs.issue }}
+           Issue link: ${{ steps.create.outputs.html_url }}
