@@ -1,0 +1,30 @@
+{
+  "identifier": "jiraIssue",
+  "title": "Jira Issue",
+  "icon": "Jira",
+  "schema": {
+    "properties": {
+      "url": {
+        "title": "Issue URL",
+        "type": "string",
+        "format": "url",
+        "description": "URL to the issue in Jira"
+      },
+      "status": {
+        "title": "Status",
+        "type": "string",
+        "description": "The status of the issue"
+      },
+      "issueType": {
+        "title": "Type",
+        "type": "string",
+        "description": "The type of the issue"
+      }
+    },
+    "required": []
+  },
+  "mirrorProperties": {},
+  "calculationProperties": {},
+  "aggregationProperties": {},
+  "relations": {}
+}
