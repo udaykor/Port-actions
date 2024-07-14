@@ -34,6 +34,6 @@ jobs:
         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
         operation: PATCH_RUN
         link: https://docs.getport.io/
-        runId: ${{ inputs.runId }}
+        runId: ${{ inputs.run_id }}
         logMessage: |
            Image deployed successfully! ✅
