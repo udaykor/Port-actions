@@ -1,0 +1,5 @@
+{
+  "image": "{{ .inputs.image }}",
+  "environment": "{{ .inputs.environment }}",
+  "run_id": "{{ .run.id }}"
+}
