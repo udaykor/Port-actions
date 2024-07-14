@@ -2,35 +2,38 @@ name: Deploy image to environment
 
 on:
   workflow_dispatch:
-
+    inputs:
+      image:
+        type: string
+      environment:
+        type: string
+      run_id:
+        type: string
+     
 jobs:
   send_message:
     runs-on: ubuntu-latest
     steps:
-    - uses: port-labs/port-github-action@v1
+    - name: Log issue creation
+      uses: port-labs/port-github-action@v1
       with:
         clientId: ${{ secrets.PORT_CLIENT_ID }}
         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-        operation: UPSERT
-        identifier: demo-bug
-        title: New demo bug
-        blueprint: jiraIssue
-        properties: |
-          {
-            "status": "To Do",
-            "type": "Bug",
-            "link": "https://hadorco.atlassian.net/browse/POR-5"
-          }
-
-    # - name: Log issue creation
-    #   uses: port-labs/port-github-action@v1
-    #   with:
-    #     clientId: ${{ secrets.PORT_CLIENT_ID }}
-    #     clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-    #     operation: PATCH_RUN
-    #     link: ${{ steps.create.outputs.html_url }}
-    #     runId: ${{ inputs.runId }}
-    #     logMessage: |
-    #        Jira issue created! ✅
+        operation: PATCH_RUN
+        runId: ${{ inputs.run_id }}
+        logMessage: |
+           Starting deployment of image "${{ inputs.image }}" to environment "${{ inputs.environment }}" 😎
            
-    #        Issue link: ${{ steps.create.outputs.html_url }}
+    # - name: Deploy image to environment
+    # Your logic here...
+
+    - name: Log issue creation
+      uses: port-labs/port-github-action@v1
+      with:
+        clientId: ${{ secrets.PORT_CLIENT_ID }}
+        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+        operation: PATCH_RUN
+        link: https://docs.getport.io/
+        runId: ${{ inputs.runId }}
+        logMessage: |
+           Image deployed successfully! ✅
