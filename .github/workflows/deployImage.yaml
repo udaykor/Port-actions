@@ -1,4 +1,4 @@
-name: Create issue when rule is degraded
+name: Deploy image to environment
 
 on:
   workflow_dispatch:
@@ -21,18 +21,7 @@ jobs:
             "type": "Bug",
             "link": "https://hadorco.atlassian.net/browse/POR-5"
           }
-    # - uses: actions/checkout@v4
-    # - name: create an issue
-    #   id: create
-    #   uses: dacbd/create-issue-action@main
-    #   with:
-    #     token: ${{ github.token }}
-    #     # By default, the issue will be created in the same repository as the workflow
-    #     repo: ${{ github.context.repo.repo}}
-    #     title: "Automation issue - degraded rule result: ${{ inputs.rule_result_name }}"
-    #     body: |
-    #       This task was created by a Port automation, due to the degradation of rule result ${{ inputs.rule_result_name }}. See evaluated entity: ${{ inputs.entity_link }}.
-    
+
     # - name: Log issue creation
     #   uses: port-labs/port-github-action@v1
     #   with:
