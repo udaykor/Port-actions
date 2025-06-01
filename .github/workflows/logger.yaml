@@ -1,0 +1,39 @@
+name: Deploy image to environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        type: string
+      environment:
+        type: string
+      run_id:
+        type: string
+     
+jobs:
+  send_message:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Log issue creation
+      uses: port-labs/port-github-action@v1
+      with:
+        clientId: ${{ secrets.PORT_CLIENT_ID }}
+        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+        operation: PATCH_RUN
+        runId: ${{ inputs.run_id }}
+        logMessage: |
+           Starting action 😎
+           
+    # - name: Deploy image to environment
+    # Your logic here...
+
+    - name: Log issue creation
+      uses: port-labs/port-github-action@v1
+      with:
+        clientId: ${{ secrets.PORT_CLIENT_ID }}
+        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+        operation: PATCH_RUN
+        link: https://docs.getport.io/
+        runId: ${{ inputs.run_id }}
+        logMessage: |
+          Action completed successfully! ✅
